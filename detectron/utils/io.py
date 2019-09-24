@@ -12,16 +12,20 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-import cPickle as pickle
+#import cPickle as pickle
 import hashlib
 import logging
 import os
 import re
+import six
 import sys
-import urllib2
+#import urllib2
+from six.moves import cPickle as pickle
+from six.moves import urllib
 
 logger = logging.getLogger(__name__)
 
+# _DETECTRON_S3_BASE_URL = 'https://dl.fbaipublicfiles.com/detectron'
 
 def save_object(obj, file_name):
     """Save a Python object by pickling it."""
@@ -29,6 +33,18 @@ def save_object(obj, file_name):
     with open(file_name, 'wb') as f:
         pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
 
+def load_object(file_name):
+    with open(file_name, 'rb') as f:
+        # The default encoding used while unpickling is 7-bit (ASCII.) However,
+        # the blobs are arbitrary 8-bit bytes which don't agree. The absolute
+        # correct way to do this is to use `encoding="bytes"` and then interpret
+        # the blob names either as ASCII, or better, as unicode utf-8. A
+        # reasonable fix, however, is to treat it the encoding as 8-bit latin1
+        # (which agrees with the first 256 characters of Unicode anyway.)
+        if six.PY2:
+            return pickle.load(f)
+        else:
+            return pickle.load(f, encoding='latin1')
 
 def cache_url(url_or_file, cache_dir):
     """Download the file specified by the URL to the cache_dir and return the
@@ -94,6 +110,30 @@ def _progress_bar(count, total):
         sys.stdout.write('\n')
 
 
+# def download_url(
+#     url, dst_file_path, chunk_size=8192, progress_hook=_progress_bar
+# ):
+#     """Download url and write it to dst_file_path.
+#     Credit:
+#     https://stackoverflow.com/questions/2028517/python-urllib2-progress-hook
+#     """
+#     #response = urllib2.urlopen(url)
+#     response = urllib.request.urlopen(url)
+#     total_size = response.info().getheader('Content-Length').strip()
+#     total_size = int(total_size)
+#     bytes_so_far = 0
+
+#     with open(dst_file_path, 'wb') as f:
+#         while 1:
+#             chunk = response.read(chunk_size)
+#             bytes_so_far += len(chunk)
+#             if not chunk:
+#                 break
+#             if progress_hook:
+#                 progress_hook(bytes_so_far, total_size)
+#             f.write(chunk)
+
+#     return bytes_so_far
 def download_url(
     url, dst_file_path, chunk_size=8192, progress_hook=_progress_bar
 ):
@@ -101,8 +141,11 @@ def download_url(
     Credit:
     https://stackoverflow.com/questions/2028517/python-urllib2-progress-hook
     """
-    response = urllib2.urlopen(url)
-    total_size = response.info().getheader('Content-Length').strip()
+    response = urllib.request.urlopen(url)
+    if six.PY2:
+        total_size = response.info().getheader('Content-Length').strip()
+    else:
+        total_size = response.info().get('Content-Length').strip()
     total_size = int(total_size)
     bytes_so_far = 0
 
@@ -118,7 +161,6 @@ def download_url(
 
     return bytes_so_far
 
-
 def _get_file_md5sum(file_name):
     """Compute the md5 hash of a file."""
     hash_obj = hashlib.md5()
@@ -130,5 +172,6 @@ def _get_file_md5sum(file_name):
 def _get_reference_md5sum(url):
     """By convention the md5 hash for url is stored in url + '.md5sum'."""
     url_md5sum = url + '.md5sum'
-    md5sum = urllib2.urlopen(url_md5sum).read().strip()
+    #md5sum = urllib2.urlopen(url_md5sum).read().strip()
+    md5sum = urllib.request.urlopen(url_md5sum).read().strip()
     return md5sum

@@ -184,7 +184,7 @@ def add_body_uv_rcnn_blobs(blobs, sampled_boxes, roidb, im_scale, batch_idx):
     V_points = np.tile( V_points , [1,K+1] )
     Uv_Weight_Points = np.zeros(U_points.shape)
     #
-    for jjj in xrange(1,K+1):
+    for jjj in range(1,K+1):
         Uv_Weight_Points[ : , jjj * I_points.shape[1]  : (jjj+1) * I_points.shape[1] ] = ( I_points == jjj ).astype(np.float32)
     #
     ################

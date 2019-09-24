@@ -175,19 +175,19 @@ _DATASETS = {
     },
     'dense_coco_2014_train': {
         _IM_DIR:
-            _DATA_DIR + '/coco/train2014',
+            _DATA_DIR + '/coco/coco_train2014',
         _ANN_FN:
             _DATA_DIR + '/coco/annotations/densepose_coco_2014_train.json',
     },
     'dense_coco_2014_minival': {
         _IM_DIR:
-            _DATA_DIR + '/coco/val2014',
+            _DATA_DIR + '/coco/coco_val2014',
         _ANN_FN:
             _DATA_DIR + '/coco/annotations/densepose_coco_2014_minival.json',
     },
     'dense_coco_2014_valminusminival': {
         _IM_DIR:
-            _DATA_DIR + '/coco/val2014',
+            _DATA_DIR + '/coco/coco_val2014',
         _ANN_FN:
             _DATA_DIR + '/coco/annotations/densepose_coco_2014_valminusminival.json',
     },

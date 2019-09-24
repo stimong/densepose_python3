@@ -120,8 +120,8 @@ def filter_for_training(roidb):
             valid = valid and entry['has_visible_keypoints']
         if cfg.MODEL.BODY_UV_ON and cfg.BODY_UV_RCNN.BODY_UV_IMS:
             # Exclude images with no body uv
-            valid = valid and entry['has_body_uv']        
-	return valid
+            valid = valid and entry['has_body_uv']
+        return valid
 
     num = len(roidb)
     filtered_roidb = [entry for entry in roidb if is_valid(entry)]

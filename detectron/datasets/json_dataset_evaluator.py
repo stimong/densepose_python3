@@ -26,6 +26,7 @@ from detectron.datasets.densepose_cocoeval import denseposeCOCOeval
 from detectron.core.config import cfg
 from detectron.utils.io import save_object
 import detectron.utils.boxes as box_utils
+from detectron.utils.io import load_object
 
 logger = logging.getLogger(__name__)
 
@@ -533,8 +534,9 @@ def _do_body_uv_eval(json_dataset, res_file, output_dir):
     imgIds = json_dataset.COCO.getImgIds()
     imgIds.sort()
     with open(res_file, 'rb') as f:
-        res=pickle.load(f)
-    coco_dt = json_dataset.COCO.loadRes(res)
+       res=pickle.load(f)
+    #res = load_object(res)
+    coco_dt = json_dataset.COCO.loadRes(str(res))
     # Non-standard params used by the modified COCO API version
     # from the DensePose fork
     test_sigma = 0.255

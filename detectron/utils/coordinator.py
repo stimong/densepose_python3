@@ -14,7 +14,8 @@ from __future__ import unicode_literals
 
 import contextlib
 import logging
-import Queue
+# import Queue
+from six.moves import queue as Queue
 import threading
 import traceback
 
