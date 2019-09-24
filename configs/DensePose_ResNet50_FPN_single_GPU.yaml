@@ -12,9 +12,9 @@ SOLVER:
   WARM_UP_FACTOR: 0.1
   # Linear scaling rule:
   # 1 GPU:
-  BASE_LR: 0.00025
-  MAX_ITER: 720000
-  STEPS: [0, 480000, 640000]
+  BASE_LR: 0.0025
+  MAX_ITER: 60000
+  STEPS: [0, 3000, 4000]
   # 2 GPUs:
   #   BASE_LR: 0.0005
   #   MAX_ITER: 360000
@@ -62,7 +62,7 @@ TRAIN:
   DATASETS: ('dense_coco_2014_train', 'dense_coco_2014_valminusminival')
   PROPOSAL_FILES: ('https://dl.fbaipublicfiles.com/densepose/DensePose-RPN-train_fpn_resnet50.pkl','https://dl.fbaipublicfiles.com/densepose/DensePose-RPN-valminusminival_fpn_resnet50.pkl')
   SCALES: (640, 672, 704, 736, 768, 800)
-  MAX_SIZE: 1333
+  MAX_SIZE: 600 # 1333
   IMS_PER_BATCH: 3
   BATCH_SIZE_PER_IM: 512
   USE_FLIPPED: True
@@ -70,7 +70,7 @@ TEST:
   DATASETS: ('dense_coco_2014_minival',)
   PROPOSAL_FILES: ('https://dl.fbaipublicfiles.com/densepose/DensePose-RPN-minival_fpn_resnet50.pkl',)
   PROPOSAL_LIMIT: 1000
-  SCALE: 800
+  SCALE: 600 #800
   MAX_SIZE: 1333
   NMS: 0.5
   FORCE_JSON_DATASET_EVAL: True

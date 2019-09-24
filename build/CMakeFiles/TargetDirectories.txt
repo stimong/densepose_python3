@@ -1,0 +1,8 @@
+/Densepose/build/CMakeFiles/install.dir
+/Densepose/build/CMakeFiles/caffe2_detectron_custom_ops.dir
+/Densepose/build/CMakeFiles/caffe2_detectron_custom_ops_gpu.dir
+/Densepose/build/CMakeFiles/install/local.dir
+/Densepose/build/CMakeFiles/edit_cache.dir
+/Densepose/build/CMakeFiles/rebuild_cache.dir
+/Densepose/build/CMakeFiles/install/strip.dir
+/Densepose/build/CMakeFiles/list_install_components.dir

@@ -1,0 +1,3 @@
+# Hashes of file build rules.
+d268199a5d016e0fea8bde81ec804745 CMakeFiles/caffe2_detectron_custom_ops_gpu.dir/detectron/ops/caffe2_detectron_custom_ops_gpu_generated_pool_points_interp.cu.o
+20ea7926bd04efeaf3c270cb1e97af20 CMakeFiles/caffe2_detectron_custom_ops_gpu.dir/detectron/ops/caffe2_detectron_custom_ops_gpu_generated_zero_even_op.cu.o
