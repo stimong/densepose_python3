@@ -164,8 +164,13 @@ class denseposeCOCOeval:
             return maskUtils.decode(rle)
 
         def _checkIgnore(dt, iregion):
+
             if iregion is None:
                 return True
+            elif len(iregion)<1:
+                return True
+            print('\n\n\nlen iregion\n',len(iregion))
+            print('\n\n\niregion\n',iregion)
 
             bb = np.array(dt['bbox']).astype(np.int)
             x1,y1,x2,y2 = bb[0],bb[1],bb[0]+bb[2],bb[1]+bb[3]
