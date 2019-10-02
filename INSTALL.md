@@ -19,6 +19,12 @@ To install Caffe2 with CUDA support, follow the [installation instructions](http
 Please ensure that your Caffe2 installation was successful before proceeding by running the following commands and checking their output as directed in the comments.
 
 ```
+git clone --recursive https://github.com/pytorch/pytorch /pytorch && cd pytorch && git checkout v1.0.0
+# if you are updating an existing checkout
+git submodule sync
+git submodule update --init --recursive
+python setup.py install
+
 # To check if Caffe2 build was successful
 python -c 'from caffe2.python import core' 2>/dev/null && echo "Success" || echo "Failure"
 
