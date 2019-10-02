@@ -20,11 +20,11 @@ Please ensure that your Caffe2 installation was successful before proceeding by 
 
 ```
 # To check if Caffe2 build was successful
-python2 -c 'from caffe2.python import core' 2>/dev/null && echo "Success" || echo "Failure"
+python -c 'from caffe2.python import core' 2>/dev/null && echo "Success" || echo "Failure"
 
 # To check if Caffe2 GPU build was successful
 # This must print a number > 0 in order to use Detectron
-python2 -c 'from caffe2.python import workspace; print(workspace.NumCudaDevices())'
+python -c 'from caffe2.python import workspace; print(workspace.NumCudaDevices())'
 ```
 
 If the `caffe2` Python package is not found, you likely need to adjust your `PYTHONPATH` environment variable to include its location (`/path/to/caffe2/build`, where `build` is the Caffe2 CMake build directory).
@@ -41,7 +41,7 @@ cd $COCOAPI/PythonAPI
 make install
 # Alternatively, if you do not have permissions or prefer
 # not to install the COCO API into global site-packages
-python2 setup.py install --user
+python setup.py install --user
 ```
 
 Note that instructions like `# COCOAPI=/path/to/install/cocoapi` indicate that you should pick a path where you'd like to have the software cloned and then set an environment variable (`COCOAPI` in this case) accordingly.
@@ -70,7 +70,7 @@ cd $DENSEPOSE && make
 Check that Detectron tests pass (e.g. for [`SpatialNarrowAsOp test`](tests/test_spatial_narrow_as_op.py)):
 
 ```
-python2 $DENSEPOSE/detectron/tests/test_spatial_narrow_as_op.py
+python $DENSEPOSE/detectron/tests/test_spatial_narrow_as_op.py
 ```
 
 Build the custom operators library:
@@ -82,7 +82,7 @@ cd $DENSEPOSE && make ops
 Check that the custom operator tests pass:
 
 ```
-python2 $DENSEPOSE/detectron/tests/test_zero_even_op.py
+python $DENSEPOSE/detectron/tests/test_zero_even_op.py
 ```
 ### Fetch DensePose data.
 Get necessary files to run, train and evaluate DensePose.
