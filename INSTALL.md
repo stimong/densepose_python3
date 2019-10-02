@@ -24,6 +24,7 @@ git clone --recursive https://github.com/pytorch/pytorch /pytorch && cd pytorch 
 git submodule sync
 git submodule update --init --recursive
 python setup.py install
+pip install future
 
 # To check if Caffe2 build was successful
 python -c 'from caffe2.python import core' 2>/dev/null && echo "Success" || echo "Failure"
